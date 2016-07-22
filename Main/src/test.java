@@ -3,7 +3,7 @@ public class test {
 
 	public static void main(String[] args) {
 		System.out.println("plz");
-
+		System.out.println("doing work");
 	}
 
 }
