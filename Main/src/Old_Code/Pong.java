@@ -107,7 +107,7 @@ public class Pong{
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		frame.setSize(400, 500);
+		frame.setSize(415, 520);
 		frame.setContentPane(panel);
 		while(true){
 			if(end==true){
