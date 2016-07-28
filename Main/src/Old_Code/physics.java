@@ -26,10 +26,10 @@ public class physics extends JFrame{
 	private String lastd="";
 	private boolean d;
 	boolean startup=true;
-	private ImageIcon character = new ImageIcon("CharacterIdle.png");
+	private ImageIcon character = new ImageIcon("resources/physics/CharacterIdle.png");
 	int i=0;
 	int b=0;
-	private ImageIcon background = new ImageIcon("Rainbow.jpg");
+	private ImageIcon background = new ImageIcon("resources/physics/Rainbow.jpg");
 
 	JPanel panel = new JPanel(){
 		public void paint(Graphics g){
@@ -42,7 +42,7 @@ public class physics extends JFrame{
 			background.paintIcon(this, g, variable%1440+1440, 0);
 			if(right){
 				lastd="right";
-				character = new ImageIcon("CharacterRun"+i+".png");
+				character = new ImageIcon("resources/physics/CharacterRun"+i+".png");
 				if(i==9){
 					i=0;
 				}
@@ -50,11 +50,11 @@ public class physics extends JFrame{
 					i++;
 			}
 			else if(lastd.equals("right")){
-				character = new ImageIcon("CharacterIdle.png");
+				character = new ImageIcon("resources/physics/CharacterIdle.png");
 			}
 			if(left){
 				lastd="left";
-				character = new ImageIcon("CharacterRunl"+b+".png");
+				character = new ImageIcon("resources/physics/CharacterRunl"+b+".png");
 				if(b==9){
 					b=0;
 				}
@@ -62,7 +62,7 @@ public class physics extends JFrame{
 					b++;
 			}
 			else if(lastd.equals("left")){
-				character = new ImageIcon("CharacterIdlel.png");
+				character = new ImageIcon("resources/physics/CharacterIdlel.png");
 			}
 			character.paintIcon(this, g, variable2, variable1);
 			/*if(!right|!left){
