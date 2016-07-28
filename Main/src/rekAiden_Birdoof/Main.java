@@ -31,7 +31,7 @@ public class Main extends JFrame{
 		left=false;
 		direction="Right";
 		int ctr=0;
-		character=new ImageIcon("resources/BidoofIdleRight0.png");
+		character=new ImageIcon("resources/platformer/BidoofIdleRight0.png");
 		binary=0;
 		boolean game=true;
 		plr=new Player(100,900,20,40);
@@ -101,20 +101,20 @@ public class Main extends JFrame{
 			}
 			if(right){
 				direction="Right";
-				character=new ImageIcon("resources/BidoofIdleRight"+binary+".png");	
+				character=new ImageIcon("resources/platformer/BidoofIdleRight"+binary+".png");	
 				plr.setVelX(3);
 			}
 			else if(!right){
-				character=new ImageIcon("resources/BidoofIdle"+direction+binary+".png");	
+				character=new ImageIcon("resources/platformer/BidoofIdle"+direction+binary+".png");	
 				plr.setVelX(0);
 			}
 			if(left){
 		 		direction="Left";
-				character=new ImageIcon("resources/BidoofIdleLeft"+binary+".png");	
+				character=new ImageIcon("resources/platformer/BidoofIdleLeft"+binary+".png");	
 				plr.setVelX(-3);
 			}
 			else if(!left&&!right){
-				character=new ImageIcon("resources/BidoofIdle"+direction+binary+".png");	
+				character=new ImageIcon("resources/platformer/BidoofIdle"+direction+binary+".png");	
 				plr.setVelX(0);
 			}
 			if((plr.getVelX()==0||plr.getVelY()<0)&&ctr%25==0&&inary==1){
@@ -124,7 +124,7 @@ public class Main extends JFrame{
 				else{
 					binary=0;
 				}
-				character=new ImageIcon("resources/BidoofIdle"+direction+binary+".png");	
+				character=new ImageIcon("resources/platformer/BidoofIdle"+direction+binary+".png");	
 			}
 			else if(plr.getVelX()!=0&&ctr%15==0&&inary==1){
 				if(binary==0){
@@ -133,7 +133,7 @@ public class Main extends JFrame{
 				else{
 					binary=0;
 				}
-				character=new ImageIcon("resources/Bidoof"+direction+binary+".png");
+				character=new ImageIcon("resources/platformer/Bidoof"+direction+binary+".png");
 			}
 			collision();
 			if(plr.getVelY()<5&&ctr%3==0){
