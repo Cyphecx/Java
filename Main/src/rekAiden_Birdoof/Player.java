@@ -40,8 +40,8 @@ public class Player {
 	public int getVelY() {
 		return velY;
 	}
-	public void setVelY(int velY) {
-		this.velY = velY;
+	public void setVelY(int d) {
+		this.velY = d;
 	}
 
 }
