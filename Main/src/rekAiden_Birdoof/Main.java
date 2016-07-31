@@ -39,7 +39,7 @@ public class Main extends JFrame{
 		character=new ImageIcon("resources/platformer/BidoofIdleRight0.png");
 		binary=0;
 		boolean game=true;
-		plr=new Player(100,800,20,40);
+		plr=new Player(1800,800,20,40);
 		JPanel pane=new JPanel(){
 			public void paint(Graphics g){
 				g.setColor(new Color(242, 242, 242));
@@ -178,7 +178,7 @@ public class Main extends JFrame{
 	public void collision(){
 		
 		for(int i=0; i<Level.LIST[currentLvl].length; i++){
-			if(plr.getxPos()+45>Level.LIST[currentLvl][i].getX()&&plr.getxPos()<Level.LIST[currentLvl][i].getX()+5&&plr.getVelY()+29>Level.LIST[currentLvl][i].getY()&&plr.getVelY()+29<Level.LIST[currentLvl][i].getY()+Level.LIST[currentLvl][i].getY()){
+			if(plr.getxPos()+45>=Level.LIST[currentLvl][i].getX()&&plr.getxPos()+45<=Level.LIST[currentLvl][i].getX()+5&&plr.getVelY()+29>Level.LIST[currentLvl][i].getY()&&plr.getVelY()+29<Level.LIST[currentLvl][i].getY()+Level.LIST[currentLvl][i].getY()){
 				plr.setxPos(plr.getxPos()-5);
 			}
 			
