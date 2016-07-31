@@ -1,3 +1,5 @@
+package Assorted2016;
+
 import java.util.ArrayList;
 
 public class ArrayListTests {

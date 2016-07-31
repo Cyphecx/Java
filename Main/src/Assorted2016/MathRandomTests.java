@@ -1,3 +1,4 @@
+package Assorted2016;
 
 public class MathRandomTests {
 
