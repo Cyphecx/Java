@@ -149,7 +149,7 @@ public class Main extends JFrame{
 				}
 				character=new ImageIcon("resources/platformer/Bidoof"+direction+binary+".png");
 			}
-			collision();
+			
 			if(plr.getVelY()<8&&ctr%2==0){
 				plr.setVelY(plr.getVelY()+1);
 			}
@@ -160,6 +160,7 @@ public class Main extends JFrame{
 			if(ctr%rawr==0){
 				rand=new Color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
 			}
+			collision();
 
 			try {
 				Thread.sleep(10);
@@ -177,22 +178,19 @@ public class Main extends JFrame{
 	public void collision(){
 		
 		for(int i=0; i<Level.LIST[currentLvl].length; i++){
-			if(plr.getxPos()+44>Level.LIST[currentLvl][i].getX()&&plr.getxPos()<Level.LIST[currentLvl][i].getX()+Level.LIST[currentLvl][i].getWidth()&&plr.getyPos()+30>Level.LIST[currentLvl][i].getY()&&plr.getyPos()+30<Level.LIST[currentLvl][i].getY()+Level.LIST[currentLvl][i].getY()){
-				plr.setyPos(plr.getyPos()-8); 
-				inary=1;
-
+			if(plr.getxPos()+45>Level.LIST[currentLvl][i].getX()&&plr.getxPos()<Level.LIST[currentLvl][i].getX()+5&&plr.getVelY()+29>Level.LIST[currentLvl][i].getY()&&plr.getVelY()+29<Level.LIST[currentLvl][i].getY()+Level.LIST[currentLvl][i].getY()){
+				plr.setxPos(plr.getxPos()-5);
 			}
-			if(plr.getyPos()+plr.getVelY()+29>Level.LIST[currentLvl][i].getY()&&plr.getyPos()+plr.getVelY()<Level.LIST[currentLvl][i].getY()+10&&plr.getxPos()+45>Level.LIST[currentLvl][i].getX()&&plr.getxPos()<Level.LIST[currentLvl][i].getX()+Level.LIST[currentLvl][i].getWidth()){
+			
+			if(plr.getyPos()+plr.getVelY()+30>Level.LIST[currentLvl][i].getY()&&plr.getyPos()+plr.getVelY()<Level.LIST[currentLvl][i].getY()&&plr.getxPos()+45>Level.LIST[currentLvl][i].getX()&&plr.getxPos()<Level.LIST[currentLvl][i].getX()+Level.LIST[currentLvl][i].getWidth()){
 				dunworry=false;
-				plr.setyPos(Level.LIST[currentLvl][i].getY()-29);
+				plr.setyPos(Level.LIST[currentLvl][i].getY()-30);
 				inary=1;
 			}
 			else{
 				dunworry=true;
 			}
-			if(plr.getxPos()+45>Level.LIST[currentLvl][i].getX()&&plr.getxPos()+45<Level.LIST[currentLvl][i].getX()+5&&plr.getVelY()+29>Level.LIST[currentLvl][i].getY()&&plr.getVelY()+29<Level.LIST[currentLvl][i].getY()+Level.LIST[currentLvl][i].getY()){
-				plr.setxPos(plr.getxPos()-5);
-			}
+			
 
 
 
