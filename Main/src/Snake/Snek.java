@@ -17,8 +17,8 @@ import javax.swing.JPanel;
 
 public class Snek extends JFrame {
 	//initializes the objects for the title page image and body image
-	ImageIcon titl=new ImageIcon("TitlePageForSnek.png");
-	ImageIcon head=new ImageIcon("SnekHeadOG.png");
+	ImageIcon titl=new ImageIcon("resources/snek/TitlePageForSnek.png");
+	ImageIcon head=new ImageIcon("resources/snek/SnekHeadOG.png");
 	//Controls the snake's movement
 	int velX=0;
 	int velY=0;
