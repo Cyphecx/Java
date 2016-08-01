@@ -63,7 +63,7 @@ public class Snek extends JFrame {
 				}
 				//In game code
 				if(gameState==1){
-					g.setColor(new Color(74,180,255));
+					g.setColor(Color.GREEN);
 					g.fillRect(0, 0,230890, 7421);
 					for(int i=0; i<body.size(); i++){
 						head.paintIcon(this, g, body.get(i).getX(),body.get(i).getY());
