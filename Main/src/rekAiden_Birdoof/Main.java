@@ -186,7 +186,7 @@ public class Main extends JFrame{
 				}
 				character=new ImageIcon("resources/platformer/Bidoof"+direction+binary+".png");
 			}
-			
+			collision();
 			if(plr.getVelY()<8&&ctr%2==0){
 				plr.setVelY(plr.getVelY()+1);
 			}
@@ -197,7 +197,7 @@ public class Main extends JFrame{
 			if(ctr%rawr==0){
 				rand=new Color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
 			}
-			collision();
+			
 
 			try {
 				Thread.sleep(12);

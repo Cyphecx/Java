@@ -14,7 +14,7 @@ public class Level {
 				new Block(20,1000,1900,0),
 				new Block(2000,40,0,980),
 				new Block(200,40,400,940),
-				new Block(300,15,660,900)
+				new Block(300,15,660,820)
 		}
 	};
 }
