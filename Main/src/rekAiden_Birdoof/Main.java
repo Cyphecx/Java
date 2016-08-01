@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -41,7 +43,7 @@ public class Main extends JFrame{
 		character=new ImageIcon("resources/platformer/BidoofIdleRight0.png");
 		binary=0;
 		boolean game=true;
-		plr=new Player(100,800,20,40);
+		plr=new Player(600,920,20,40);
 		JPanel pane=new JPanel(){
 			public void paint(Graphics g){
 				g.setColor(new Color(242, 242, 242));
@@ -56,11 +58,6 @@ public class Main extends JFrame{
 				}
 			}
 		};
-	
-	
-		
-	
-
 		setMaximizedBounds(getMaximizedBounds());
 		setExtendedState(JFrame.MAXIMIZED_BOTH );
 		setIconImage(img.getImage());
@@ -68,6 +65,39 @@ public class Main extends JFrame{
 		add(pane);
 		
 		setDefaultCloseOperation(3);
+		addMouseListener(new MouseListener(){
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println(arg0.getX()+", "+arg0.getY());
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		addKeyListener(new KeyListener(){
 			
 			@Override
@@ -85,7 +115,7 @@ public class Main extends JFrame{
 					jump=true;
 				}
 				if(e.getKeyCode()==KeyEvent.VK_O){
-					rawr=3;
+					rawr=1;
 				}
 			}
 
@@ -170,12 +200,11 @@ public class Main extends JFrame{
 			collision();
 
 			try {
-				Thread.sleep(10);
+				Thread.sleep(12);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-
 			ctr++;
 			//System.out.println(ctr);
 			repaint();
@@ -195,8 +224,12 @@ public class Main extends JFrame{
 				plr.setxPos(plr.getxPos()+4);
 				//right
 			}
-			
-			if(plr.getyPos() + plr.getVelY() + 30 > obj.getY()&&plr.getyPos() + plr.getVelY() < obj.getY() && plr.getxPos() + 45 > obj.getX() && plr.getxPos() < obj.getX() + obj.getWidth() ){
+			if(plr.getyPos() < obj.getY() + obj.getHeight() && plr.getyPos() > obj.getY() + obj.getHeight() - 9 && plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() + 45 > obj.getX() ){
+				plr.setyPos(obj.getY()+obj.getHeight());
+				plr.setVelY(0);
+				//bottom
+			}
+			if(plr.getyPos() + plr.getVelY() + 30 > obj.getY()&&plr.getyPos() + plr.getVelY() < obj.getY() && plr.getxPos() + 45 > obj.getX() && plr.getxPos() < obj.getX() + obj.getWidth()){
 				dunworry=false;
 				plr.setyPos( obj.getY()-30);
 				inary=1;
