@@ -187,7 +187,7 @@ public class Main extends JFrame{
 		for(int i=0; i<Level.LIST[currentLvl].length; i++){
 			if(plr.getxPos()+45>=Level.LIST[currentLvl][i].getX()&&plr.getxPos()+45<=Level.LIST[currentLvl][i].getX()+5&&plr.getVelY()+29>Level.LIST[currentLvl][i].getY()&&plr.getVelY()+29<Level.LIST[currentLvl][i].getY()+Level.LIST[currentLvl][i].getY()){
 				plr.setxPos(plr.getxPos()-5);
-				System.out.println("rawr");
+
 			}
 			
 			if(plr.getyPos()+plr.getVelY()+30>Level.LIST[currentLvl][i].getY()&&plr.getyPos()+plr.getVelY()<Level.LIST[currentLvl][i].getY()&&plr.getxPos()+45>Level.LIST[currentLvl][i].getX()&&plr.getxPos()<Level.LIST[currentLvl][i].getX()+Level.LIST[currentLvl][i].getWidth()){
