@@ -23,6 +23,7 @@ public class Main extends JFrame{
 	Player plr;
 	int currentLvl=0;
 	Color rand;
+	ImageIcon img;
 	boolean dunworry=false;
 	public static void main(String[] args) {
 		new Main();
@@ -36,6 +37,7 @@ public class Main extends JFrame{
 		left=false;
 		direction="Right";
 		int ctr=0;
+		img = new ImageIcon("resources/platformer/BidoofIdleLeft0.png");
 		character=new ImageIcon("resources/platformer/BidoofIdleRight0.png");
 		binary=0;
 		boolean game=true;
@@ -54,15 +56,20 @@ public class Main extends JFrame{
 				}
 			}
 		};
-		setVisible(true);
-		pane.setPreferredSize(new Dimension(1900,1000));
-		setBounds(0,0,1920,1000);
-		add(pane);
-		pack();
+	
+	
+		
+	
 
+		setMaximizedBounds(getMaximizedBounds());
+		setExtendedState(JFrame.MAXIMIZED_BOTH );
+		setIconImage(img.getImage());
+		setVisible(true);
+		add(pane);
+		
 		setDefaultCloseOperation(3);
 		addKeyListener(new KeyListener(){
-
+			
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode()==KeyEvent.VK_ESCAPE){
