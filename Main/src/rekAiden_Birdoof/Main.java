@@ -41,7 +41,7 @@ public class Main extends JFrame{
 		character=new ImageIcon("resources/platformer/BidoofIdleRight0.png");
 		binary=0;
 		boolean game=true;
-		plr=new Player(1800,800,20,40);
+		plr=new Player(100,800,20,40);
 		JPanel pane=new JPanel(){
 			public void paint(Graphics g){
 				g.setColor(new Color(242, 242, 242));
@@ -188,14 +188,19 @@ public class Main extends JFrame{
 			Tile obj=Level.LIST[currentLvl][i];
 			if(plr.getxPos() + 44 > obj.getX() && plr.getxPos() + 44 < obj.getX() + 6 && plr.getyPos () + 30 > obj.getY() && plr.getyPos () < obj.getY() + obj.getHeight() ){
 				plr.setxPos(plr.getxPos()-4);
-				System.out.println("ddd");
+				//left wall
 
+			}
+			if(plr.getxPos() < obj.getX() + obj.getWidth()&& plr.getxPos() > obj.getX() + obj.getWidth() - 5 && plr.getyPos() + 29 > obj.getY() && plr.getyPos() + 29 < obj.getY() + obj.getHeight() ){
+				plr.setxPos(plr.getxPos()+4);
+				//right
 			}
 			
 			if(plr.getyPos() + plr.getVelY() + 30 > obj.getY()&&plr.getyPos() + plr.getVelY() < obj.getY() && plr.getxPos() + 45 > obj.getX() && plr.getxPos() < obj.getX() + obj.getWidth() ){
 				dunworry=false;
 				plr.setyPos( obj.getY()-30);
 				inary=1;
+				//top
 			}
 			else{
 				dunworry=true;
