@@ -43,7 +43,8 @@ public class Main extends JFrame{
 		character=new ImageIcon("resources/platformer/BidoofIdleRight0.png");
 		binary=0;
 		boolean game=true;
-		plr=new Player(400,910,30,45);
+		//plr=new Player(400,910,30,45);
+		plr=new Player(1430,590,30,45);
 		JPanel pane=new JPanel(){
 			public void paint(Graphics g){
 				g.setColor(new Color(242, 242, 242));
@@ -270,14 +271,14 @@ public class Main extends JFrame{
 				}
 			}
 			if(obj instanceof Lava){
-				if(plr.getxPos()+plr.getVelX() + 44 > obj.getX() && plr.getxPos()+plr.getVelX() + 44 < obj.getX() + 6 && plr.getyPos() + 30 > obj.getY() && plr.getyPos () < obj.getY() + obj.getHeight() ){
+				if(plr.getxPos() + 44 > obj.getX() && plr.getxPos() + 44 < obj.getX() + 6 && plr.getyPos() + 30 > obj.getY() && plr.getyPos () < obj.getY() + obj.getHeight() ){
 					plr.setxPos(400);
 					plr.setyPos(910);
 					plr.setVelY(0);
 					plr.setVelX(0);
 					//left 
 				}
-				if(plr.getxPos()+plr.getVelX() < obj.getX() + obj.getWidth() && plr.getxPos()+plr.getVelX() > obj.getX() + obj.getWidth() - 6 && plr.getyPos() + 30 > obj.getY() && plr.getyPos() < obj.getY() + obj.getHeight() ){
+				if(plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() > obj.getX() + obj.getWidth() - 6 && plr.getyPos() + 30 > obj.getY() && plr.getyPos() < obj.getY() + obj.getHeight() ){
 					plr.setxPos(400);
 					plr.setyPos(910);
 					plr.setVelY(0);
