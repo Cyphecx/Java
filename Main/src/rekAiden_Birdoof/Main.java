@@ -43,7 +43,7 @@ public class Main extends JFrame{
 		character=new ImageIcon("resources/platformer/BidoofIdleRight0.png");
 		binary=0;
 		boolean game=true;
-		plr=new Player(600,920,20,40);
+		plr=new Player(400,910,30,45);
 		JPanel pane=new JPanel(){
 			public void paint(Graphics g){
 				g.setColor(new Color(242, 242, 242));
@@ -52,9 +52,16 @@ public class Main extends JFrame{
 				character.paintIcon(this, g ,plr.getxPos(), plr.getyPos());
 				g.setColor(Color.BLACK);
 				g.drawRect(plr.getxPos(), plr.getyPos(),45,30);
-				g.setColor(rand);
+
 				for(int i=0; i<Level.LIST[currentLvl].length; i++){
-					g.fillRect( Level.LIST[currentLvl][i].getX(),  Level.LIST[currentLvl][i].getY(),  Level.LIST[currentLvl][i].getWidth(), Level.LIST[currentLvl][i].getHeight());
+					if(Level.LIST[currentLvl][i] instanceof Block){
+						g.setColor(new Color(0, 85, 255));
+						g.fillRect( Level.LIST[currentLvl][i].getX(),  Level.LIST[currentLvl][i].getY(),  Level.LIST[currentLvl][i].getWidth(), Level.LIST[currentLvl][i].getHeight());
+					}
+					if(Level.LIST[currentLvl][i] instanceof Lava){
+						g.setColor(Color.RED);
+						g.fillRect( Level.LIST[currentLvl][i].getX(),  Level.LIST[currentLvl][i].getY(),  Level.LIST[currentLvl][i].getWidth(), Level.LIST[currentLvl][i].getHeight());
+					}
 				}
 			}
 		};
@@ -63,43 +70,43 @@ public class Main extends JFrame{
 		setIconImage(img.getImage());
 		setVisible(true);
 		add(pane);
-		
+
 		setDefaultCloseOperation(3);
 		addMouseListener(new MouseListener(){
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println(arg0.getX()+", "+arg0.getY());
-				
+
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mouseExited(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 		});
 		addKeyListener(new KeyListener(){
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode()==KeyEvent.VK_ESCAPE){
@@ -146,7 +153,6 @@ public class Main extends JFrame{
 
 		while(game){
 			if(jump&&inary>0){
-				plr.setVelY(0);
 				plr.setVelY(-12);
 				inary--;
 			}
@@ -186,7 +192,7 @@ public class Main extends JFrame{
 				}
 				character=new ImageIcon("resources/platformer/Bidoof"+direction+binary+".png");
 			}
-			collision();
+			collisionLR();
 			if(plr.getVelY()<8&&ctr%2==0){
 				plr.setVelY(plr.getVelY()+1);
 			}
@@ -197,10 +203,9 @@ public class Main extends JFrame{
 			if(ctr%rawr==0){
 				rand=new Color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
 			}
-			
-
+			collision();
 			try {
-				Thread.sleep(12);
+				Thread.sleep(13);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -208,42 +213,78 @@ public class Main extends JFrame{
 			ctr++;
 			//System.out.println(ctr);
 			repaint();
-
 		}
 	}
 	public void collision(){
-		
+
 		for(int i=0; i<Level.LIST[currentLvl].length; i++){
 			Tile obj=Level.LIST[currentLvl][i];
-			if(plr.getxPos() + 44 > obj.getX() && plr.getxPos() + 44 < obj.getX() + 6 && plr.getyPos () + 30 > obj.getY() && plr.getyPos () < obj.getY() + obj.getHeight() ){
-				plr.setxPos(plr.getxPos()-4);
-				//left wall
-
+			if(obj instanceof Block){
+				if(plr.getyPos() < obj.getY() + obj.getHeight() && plr.getyPos() > obj.getY() + obj.getHeight() - 9 && plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() + 45 > obj.getX() ){
+					plr.setyPos(obj.getY()+obj.getHeight());
+					plr.setVelY(0);
+					//bottom
+				}
+				if(plr.getyPos() + plr.getVelY() + 30 > obj.getY()&&plr.getyPos() + plr.getVelY() < obj.getY() && plr.getxPos() + 44 > obj.getX() && plr.getxPos() < obj.getX() + obj.getWidth()){
+					dunworry=false;
+					plr.setyPos( obj.getY()-30);
+					inary=1;
+					//top
+				}
+				else{
+					dunworry=true;
+				}
 			}
-			if(plr.getxPos() < obj.getX() + obj.getWidth()&& plr.getxPos() > obj.getX() + obj.getWidth() - 5 && plr.getyPos() + 29 > obj.getY() && plr.getyPos() + 29 < obj.getY() + obj.getHeight() ){
-				plr.setxPos(plr.getxPos()+4);
-				//right
+			if(obj instanceof Lava){
+				if(plr.getyPos() < obj.getY() + obj.getHeight() && plr.getyPos() > obj.getY() + obj.getHeight() - 9 && plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() + 45 > obj.getX() ){
+					plr.setxPos(400);
+					plr.setyPos(910);
+					plr.setVelY(0);
+					plr.setVelX(0);
+					//bottom11
+				}
+				if(plr.getyPos() + 30 > obj.getY()&&plr.getyPos() + plr.getVelY() < obj.getY() && plr.getxPos() + 44 > obj.getX() && plr.getxPos() < obj.getX() + obj.getWidth()){
+					plr.setxPos(400);
+					plr.setyPos(910);
+					plr.setVelY(0);
+					plr.setVelX(0);
+					//top
+				}
+				else{
+					dunworry=true;
+				}
 			}
-			if(plr.getyPos() < obj.getY() + obj.getHeight() && plr.getyPos() > obj.getY() + obj.getHeight() - 9 && plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() + 45 > obj.getX() ){
-				plr.setyPos(obj.getY()+obj.getHeight());
-				plr.setVelY(0);
-				//bottom
-			}
-			if(plr.getyPos() + plr.getVelY() + 30 > obj.getY()&&plr.getyPos() + plr.getVelY() < obj.getY() && plr.getxPos() + 45 > obj.getX() && plr.getxPos() < obj.getX() + obj.getWidth()){
-				dunworry=false;
-				plr.setyPos( obj.getY()-30);
-				inary=1;
-				//top
-			}
-			else{
-				dunworry=true;
-			}
-			
-
-
-
 		}
-
 	}
-
+	public void collisionLR(){
+		for(int i=0; i<Level.LIST[currentLvl].length; i++){
+			Tile obj=Level.LIST[currentLvl][i];
+			if(obj instanceof Block){
+				if(plr.getxPos()+plr.getVelX() + 44 > obj.getX() && plr.getxPos()+plr.getVelX() + 44 < obj.getX() + 6 && plr.getyPos() + 30 > obj.getY() && plr.getyPos () < obj.getY() + obj.getHeight() ){
+					plr.setxPos(plr.getxPos() - 4);
+					//left
+				}
+				if(plr.getxPos()+plr.getVelX() < obj.getX() + obj.getWidth() && plr.getxPos()+plr.getVelX() > obj.getX() + obj.getWidth() - 6 && plr.getyPos() + 30 > obj.getY() && plr.getyPos() < obj.getY() + obj.getHeight() ){
+					plr.setxPos(plr.getxPos() + 4);
+					//right
+				}
+			}
+			if(obj instanceof Lava){
+				if(plr.getxPos()+plr.getVelX() + 44 > obj.getX() && plr.getxPos()+plr.getVelX() + 44 < obj.getX() + 6 && plr.getyPos() + 30 > obj.getY() && plr.getyPos () < obj.getY() + obj.getHeight() ){
+					plr.setxPos(400);
+					plr.setyPos(910);
+					plr.setVelY(0);
+					plr.setVelX(0);
+					//left 
+				}
+				if(plr.getxPos()+plr.getVelX() < obj.getX() + obj.getWidth() && plr.getxPos()+plr.getVelX() > obj.getX() + obj.getWidth() - 6 && plr.getyPos() + 30 > obj.getY() && plr.getyPos() < obj.getY() + obj.getHeight() ){
+					plr.setxPos(400);
+					plr.setyPos(910);
+					plr.setVelY(0);
+					plr.setVelX(0);
+					//right
+				}
+			}
+		}
+	}
 }
