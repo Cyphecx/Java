@@ -53,7 +53,7 @@ public class Main extends JFrame{
 				g.setColor(new Color(242, 242, 242));
 				g.fillRect( 0, 0, 1920, 1000);
 
-				character.paintIcon(this, g ,plr.getxPos(), plr.getyPos());
+
 				g.setColor(Color.BLACK);
 				g.drawRect(plr.getxPos(), plr.getyPos(),45,30);
 
@@ -66,7 +66,12 @@ public class Main extends JFrame{
 						g.setColor(Color.RED);
 						g.fillRect( Level.LIST[currentLvl][i].getX(),  Level.LIST[currentLvl][i].getY(),  Level.LIST[currentLvl][i].getWidth(), Level.LIST[currentLvl][i].getHeight());
 					}
+					if(Level.LIST[currentLvl][i].getState() == 2){
+						g.setColor(Color.GREEN);
+						g.fillRect( Level.LIST[currentLvl][i].getX(),  Level.LIST[currentLvl][i].getY(),  Level.LIST[currentLvl][i].getWidth(), Level.LIST[currentLvl][i].getHeight());
+					}
 				}
+				character.paintIcon(this, g ,plr.getxPos(), plr.getyPos());
 			}
 		};
 		setMaximizedBounds(getMaximizedBounds());
@@ -258,6 +263,21 @@ public class Main extends JFrame{
 				else{
 					dunworry = true;
 				}
+				if(obj.getState() == 2){
+					if(plr.getyPos() < obj.getY() + obj.getHeight() && plr.getyPos() > obj.getY() + obj.getHeight() - 9 && plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() + 45 > obj.getX() ){
+						spawnX=(int)((Checkpoint) obj).getSpawnX();
+						spawnY=(int)((Checkpoint) obj).getSpawnY();
+						//bottom11
+					}
+					if(plr.getyPos() + 30 > obj.getY()&&plr.getyPos() + plr.getVelY() < obj.getY() && plr.getxPos() + 44 > obj.getX() && plr.getxPos() < obj.getX() + obj.getWidth()){
+						spawnX=(int)((Checkpoint) obj).getSpawnX();
+						spawnY=(int)((Checkpoint) obj).getSpawnY();
+						//top
+					}
+					else{
+						dunworry = true;
+					}
+				}
 			}
 		}
 	}
@@ -287,6 +307,18 @@ public class Main extends JFrame{
 					plr.setyPos(spawnY);
 					plr.setVelY(0);
 					plr.setVelX(0);
+					//right
+				}
+			}
+			if(obj.getState() == 2){
+				if(plr.getxPos() + 44 > obj.getX() && plr.getxPos() + 44 < obj.getX() + 6 && plr.getyPos() + 30 > obj.getY() && plr.getyPos () < obj.getY() + obj.getHeight() ){
+					spawnX=(int)((Checkpoint) obj).getSpawnX();
+					spawnY=(int)((Checkpoint) obj).getSpawnY();
+					//left 
+				}
+				if(plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() > obj.getX() + obj.getWidth() - 6 && plr.getyPos() + 30 > obj.getY() && plr.getyPos() < obj.getY() + obj.getHeight() ){
+					spawnX=(int)((Checkpoint) obj).getSpawnX();
+					spawnY=(int)((Checkpoint) obj).getSpawnY();
 					//right
 				}
 			}
