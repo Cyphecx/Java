@@ -15,6 +15,7 @@ public class Level {
 				//Spawn Platform
 				new Tile( 0,  200, 40, 400, 940), 
 				//End Cage
+				new Tile(3, 40,40, 87, 550),
 				new Tile( 0,  175, 20, 20, 620), 
 				new Tile( 0,  20, 350, 195, 20), 
 				new Tile( 0,  20, 170, 195, 470),

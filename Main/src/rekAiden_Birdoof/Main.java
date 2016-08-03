@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Main extends JFrame{
@@ -52,11 +53,6 @@ public class Main extends JFrame{
 			public void paint(Graphics g){
 				g.setColor(new Color(242, 242, 242));
 				g.fillRect( 0, 0, 1920, 1000);
-
-
-				g.setColor(Color.BLACK);
-				g.drawRect(plr.getxPos(), plr.getyPos(),45,30);
-
 				for(int i = 0; i<Level.LIST[currentLvl].length; i++){
 					if(Level.LIST[currentLvl][i].getState()==0){
 						g.setColor(new Color(0, 85, 255));
@@ -68,6 +64,10 @@ public class Main extends JFrame{
 					}
 					if(Level.LIST[currentLvl][i].getState() == 2){
 						g.setColor(Color.GREEN);
+						g.fillRect( Level.LIST[currentLvl][i].getX(),  Level.LIST[currentLvl][i].getY(),  Level.LIST[currentLvl][i].getWidth(), Level.LIST[currentLvl][i].getHeight());
+					}
+					if(Level.LIST[currentLvl][i].getState() ==3 ){
+						g.setColor(Color.CYAN);
 						g.fillRect( Level.LIST[currentLvl][i].getX(),  Level.LIST[currentLvl][i].getY(),  Level.LIST[currentLvl][i].getWidth(), Level.LIST[currentLvl][i].getHeight());
 					}
 				}
@@ -322,6 +322,7 @@ public class Main extends JFrame{
 					//right
 				}
 			}
+			
 		}
 	}
 }
