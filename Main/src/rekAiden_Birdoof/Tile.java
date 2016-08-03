@@ -5,8 +5,16 @@ public class Tile {
 	protected int height;
 	private int x;
 	private int y;
-	public Tile(int w, int h,int x,int y){
+	private int state;
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
+	}
+	public Tile(int state, int w, int h,int x,int y){
 		this.width=w;
+		this.state=state;
 		this.height=h;
 		this.x=x;
 		this.y=y;
@@ -24,3 +32,4 @@ public class Tile {
 		return y;
 	}
 }
+
