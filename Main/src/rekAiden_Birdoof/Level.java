@@ -4,7 +4,7 @@ package rekAiden_Birdoof;
 import java.util.ArrayList;
 
 public class Level {
-
+	//Class for storing level data
 	static Tile[][] LIST=new Tile[][]{
 		new Tile[]{
 				//Borders

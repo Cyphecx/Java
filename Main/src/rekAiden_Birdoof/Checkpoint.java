@@ -1,6 +1,7 @@
 package rekAiden_Birdoof;
 
 public class Checkpoint extends Tile{
+	//extends tile to have extra parameters
 	private int spawnX;
 	private int spawnY;
 	public Checkpoint(int state, int w, int h, int x, int y, int spawnX, int spawnY) {

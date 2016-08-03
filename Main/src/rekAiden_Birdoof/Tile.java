@@ -1,6 +1,7 @@
 package rekAiden_Birdoof;
 
 public class Tile {
+	//all environment objects extend Tile or are Tiles
 	private int width;
 	protected int height;
 	private int x;

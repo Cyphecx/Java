@@ -1,6 +1,7 @@
 package rekAiden_Birdoof;
 
 public class Player {
+	//basic player object with x y and velocity tracking
 	private int xPos=0;
 	private int yPos=0;
 	private int velX=0;
