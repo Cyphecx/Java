@@ -1,4 +1,4 @@
-package rekAiden_Birdoof;
+package Bidoof_Platformer;
 
 public class Checkpoint extends Tile{
 	//extends tile to have extra parameters

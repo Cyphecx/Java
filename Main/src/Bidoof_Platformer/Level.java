@@ -1,5 +1,5 @@
 
-package rekAiden_Birdoof;
+package Bidoof_Platformer;
 
 import java.util.ArrayList;
 

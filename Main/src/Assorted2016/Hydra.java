@@ -9,12 +9,12 @@ import java.awt.event.WindowListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class HeilHydra_Cpt extends JFrame{
+public class Hydra extends JFrame{
 
 	public static void main(String[] args) {
-		new HeilHydra_Cpt();
+		new Hydra();
 	}
-	public HeilHydra_Cpt(){
+	public Hydra(){
 		JButton jb=new JButton("Opens Minecraft. Gets a Hydra");
 		setVisible(true);
 		add(jb);
@@ -23,7 +23,7 @@ public class HeilHydra_Cpt extends JFrame{
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				for(int i=0; i<11; i++){
-					new HeilHydra_Cpt();
+					new Hydra();
 				}
 			}
 
@@ -45,7 +45,7 @@ public class HeilHydra_Cpt extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				for(int i=0; i<11; i++){
-					new HeilHydra_Cpt();
+					new Hydra();
 				}
 				
 			}
@@ -70,7 +70,7 @@ public class HeilHydra_Cpt extends JFrame{
 			@Override
 			public void windowClosing(WindowEvent arg0) {
 				for(int i=0; i<11; i++){
-					new HeilHydra_Cpt();
+					new Hydra();
 				}
 			}
 

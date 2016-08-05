@@ -1,4 +1,4 @@
-package rekAiden_Birdoof;
+package Bidoof_Platformer;
 
 public class Player {
 	//basic player object with x y and velocity tracking

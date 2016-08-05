@@ -1,4 +1,4 @@
-package rekAiden_Birdoof;
+package Bidoof_Platformer;
 
 public class Tile {
 	//all environment objects extend Tile or are Tiles

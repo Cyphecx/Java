@@ -1,4 +1,4 @@
-package rekAiden_Birdoof;
+package Bidoof_Platformer;
 
 import java.awt.Color;
 import java.awt.Component;
