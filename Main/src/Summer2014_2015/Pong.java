@@ -6,8 +6,8 @@ import java.awt.Graphics;
 import java.awt.MouseInfo;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 public class Pong{
 	static JFrame frame;
@@ -27,7 +27,7 @@ public class Pong{
 	static int mousey;
 	static int L;
 	static int P;
-	static int O = st.Prompt.getInt("What do you want to play to?");
+	static int O = Integer.parseInt(JOptionPane.showInputDialog("What do you want to play to?"));
 	static boolean end;
 	public static void main(String[] args) {
 		panel = new JPanel(){

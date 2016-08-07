@@ -7,10 +7,9 @@ public class decryption {
 	static String input;
 	static int input2;
 	public static void main(String[] args) {
-		input2=st.Prompt.getInt();
+		input2=scan.nextInt();
 		while(input2>=27||input2<=0){
 			System.out.println("That is a bad number choose a different one");
-			input2=st.Prompt.getInt();
 		}
 		input = scan.nextLine();
 		String shifted = "";

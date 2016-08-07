@@ -1,9 +1,11 @@
 package Summer2014_2015;
 
+import javax.swing.JOptionPane;
+
 public class Hollow_Diamond {
 	public static void main(String[] args) {
 		int d = 1;
-		int w = st.Prompt.getInt();
+		int w = Integer.parseInt(JOptionPane.showInputDialog("Scale Factor"));
 		int f = w;
 		int v = 0;
 

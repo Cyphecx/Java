@@ -1,7 +1,9 @@
 package Summer2014_2015;
 import java.util.Random;
+import java.util.Scanner;
 public class Connect4withAI{
 	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
 		int z = 5;
 		int turn = 1;
 		int k = 0;
@@ -15,7 +17,8 @@ public class Connect4withAI{
 			} 
 
 		}
-		String cpu = st.Prompt.getString("Do you want to play against the computer? Yes||No ");
+		System.out.println("Do you want to play against the computer? Yes||No ");
+		String cpu = scan.toString();
 		for (k = 0; k < 6; k ++){
 			System.out.println("");
 			for (int e = 0; e < 7; e ++){
@@ -40,14 +43,17 @@ public class Connect4withAI{
 		System.out.print("= = = = = = =");
 		while(cpu.equals("No")){
 			while(turn == 1){
-				int chord1 = st.Prompt.getInt("Make your move Player"+ turn);
+				System.out.println("Make your move Player"+ turn+"\n");
+				int chord1 = scan.nextInt();
 				while(chord1 > 7){
-					chord1 = st.Prompt.getInt("Column doesn't exist, try again");
+					System.out.println("Column doesn't exist, try again \n");
+					chord1 = scan.nextInt();
 				}
 				while(C[z][chord1-1] != 0){
 					z--;
 					while(z < 0){
-						chord1 = st.Prompt.getInt("Column full, try again");
+						System.out.println("Column full, try again");
+						chord1 = scan.nextInt();
 						z = 5;
 					}
 				}
@@ -119,14 +125,17 @@ public class Connect4withAI{
 			}
 			while(turn == 2){
 
-				int chord1 = st.Prompt.getInt("Make your move Player"+ turn);
+				System.out.println("Make your move Player"+ turn+"\n");
+				int chord1 = scan.nextInt();
 				while(chord1 > 7){
-					chord1 = st.Prompt.getInt("Column doesn't exist, try again");
+					System.out.println("Column doesn't exist, try again \n");
+					chord1 = scan.nextInt();
 				}
 				while(C[z][chord1-1] != 0){
 					z--;
 					while(z < 0){
-						chord1 = st.Prompt.getInt("Column full, try again");
+						System.out.println("Column full, try again");
+						chord1 = scan.nextInt();
 						z = 5;
 					}
 				}
@@ -201,14 +210,17 @@ public class Connect4withAI{
 		}
 		while(cpu.equals("Yes")){
 			while(turn == 1){
-				int chord1 = st.Prompt.getInt("Make your move Player");
+				System.out.println("Make your move Player"+ turn+"\n");
+				int chord1 = scan.nextInt();
 				while(chord1 > 7){
-					chord1 = st.Prompt.getInt("Column doesn't exist, try again");
+					System.out.println("Column doesn't exist, try again \n");
+					chord1 = scan.nextInt();
 				}
 				while(C[z][chord1-1] != 0){
 					z--;
 					while(z < 0){
-						chord1 = st.Prompt.getInt("Column full, try again");
+						System.out.println("Column full, try again");
+						chord1 = scan.nextInt();
 						z = 5;
 					}
 				}

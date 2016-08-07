@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 public class Paint extends JFrame implements MouseListener, MouseMotionListener,KeyListener{
@@ -32,7 +33,7 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener,
 	}
 	public void paint(Graphics g){
 		while(brush>999){
-			brush=st.Prompt.getInt("Number too large: try again");
+			brush=Integer.parseInt(JOptionPane.showInputDialog("Too Large. Try Again"));
 		}
 		g.setColor(Color.gray);
 		g.fillRect(0, 0, 1440, 100);
@@ -177,7 +178,7 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener,
 			brush=brush+5;
 		}
 		if(mousex<1423&&mousex>1323&&mousey<63&&mousey>53&&brush<995){
-			brush=st.Prompt.getInt("Enter brush size");
+			brush=Integer.parseInt(JOptionPane.showInputDialog("Enter brush size"));
 		}
 		if(mousex<1423&&mousex>1323&&mousey<78&&mousey>68&&brush>5){
 			brush=brush-5;
