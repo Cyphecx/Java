@@ -7,6 +7,8 @@ brickBreaker is a multi-class object based brick breaker game I made. Collision 
 Maze contains a single class that was a response to a challenge to use the Maze.jar as a library to make an auto maze path finder that would work on a randomly generated maze in about 3hrs
 I used recursion as my method to solve the maze. My program currently gets stuck in a loop between certain types of junctions and should I return to the project I would use a different approach and rewrite the whole thing
 
+projectEueler is where the respones to projecteuler.net problems that I have completed are kept. Im still continuing to work on more problems from project Euler.
+
 Bidoof_Platformer is a platformer game that has been constructed using a Level class to store level data, player object, and an a general purposes Tile object for all environment objects
 One level has been constructed the majority of basic mechanics are in the project is on hold because creating the levels is really time consuming also creating a level construction interface may be in the pipeline as it is very do-able
 
