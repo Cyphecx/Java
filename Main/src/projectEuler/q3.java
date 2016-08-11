@@ -1,11 +1,12 @@
 package projectEuler;
 
 import java.util.ArrayList;
-// Question
-// The prime factors of 13195 are 5, 7, 13 and 29.
+
+//Largest prime factor
+//Problem 3
+//The prime factors of 13195 are 5, 7, 13 and 29.
 //
-// What is the largest prime factor of the number 600851475143 ?
-// Works but is very slow could be improved with sieve of eratostothenese
+//What is the largest prime factor of the number 600851475143 ?
 
 public class q3 {
 	public static void main(String[] args){
