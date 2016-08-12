@@ -6,6 +6,8 @@ public class primeGen {
 	public static ArrayList<Integer> primes(int max){
 		ArrayList<Integer> primes = new ArrayList<Integer>();
 		boolean[] primality = new boolean[max];
+		primality[0] = false;
+		primality[1] = false;
 		for(int i = 2; i < primality.length; i++){
 			primality[i] = true;
 		}
