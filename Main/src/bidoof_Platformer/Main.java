@@ -1,17 +1,15 @@
 package bidoof_Platformer;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Main extends JFrame{
@@ -28,60 +26,62 @@ public class Main extends JFrame{
 	Color rand;
 	static int spawnX;
 	static int spawnY;
-	ImageIcon img;
-	boolean dunworry = false;
-	public static void main(String[] args) {
-		new Main();
-
-	}
-	public Main(){
+	ImageIcon icon;
+	ArrayList<ArrayList> level;
+	boolean move = false;
+	public Main() throws IOException{
 		// booleans to keep track if a movement button has been press
 		right = false;
 		jump = false;
 		left = false;
+		//retrieves level data from level files and assigns that to an ArrayList
+		LevelInterpreter interp = new LevelInterpreter("resources/platformer/level.lvl");
+		level = interp.levels();
 		//x and y of current player spawnpoint 
 		spawnX = 400;
 		spawnY = 910;
-		//direction tracking for animations and ctr to make things happen only so often
+		//direction tracking for animations and ctr to make animations and other time dependant things happen only so often
 		direction = "Right";
 		int ctr = 0;
 		//game icon and imageIcon in which the character pngs are stored
-		img  =   new ImageIcon("resources/platformer/Icon.png");
+		icon  =   new ImageIcon("resources/platformer/Icon.png");
 		character = new ImageIcon("resources/platformer/BidoofIdleRight0.png");
-		// binary is used in animation to cycle between 0 and 1 
+		// binary is used in animations to cycle between 2 different case scenarios
 		binary = 0;
 		//runs while game is true
 		boolean game = true;
 		// creates player object
 		plr = new Player(400,910,30,45);
-		JPanel pane = new JPanel(){
+		//Creates JPanel
+		JPanel panel = new JPanel(){
 			// paint method
 			public void paint(Graphics g){
 				// draws background
 				g.setColor(new Color(242, 242, 242));
 				g.fillRect( 0, 0, 1920, 1000);
-				// draws each type of object
+				// Draws all objects
 					
-				for(int i = 0; i<Level.LIST[currentLvl].length; i++){
+				for(int i = 0; i < level.get(currentLvl).size(); i++){
 					//Block
-					if(Level.LIST[currentLvl][i].getState()==0){
+					Tile currTile = (Tile) level.get(currentLvl).get(i);
+					if(((Tile) currTile).getState()== 0){
 						g.setColor(new Color(0, 85, 255));
-						g.fillRect( Level.LIST[currentLvl][i].getX(),  Level.LIST[currentLvl][i].getY(),  Level.LIST[currentLvl][i].getWidth(), Level.LIST[currentLvl][i].getHeight());
+						g.fillRect( currTile.getX(), currTile.getY(), currTile.getWidth(), currTile.getHeight());
 					}
 					//Lava
-					if(Level.LIST[currentLvl][i].getState()==1){
+					if(currTile.getState()== 1){
 						g.setColor(Color.RED);
-						g.fillRect( Level.LIST[currentLvl][i].getX(),  Level.LIST[currentLvl][i].getY(),  Level.LIST[currentLvl][i].getWidth(), Level.LIST[currentLvl][i].getHeight());
+						g.fillRect( currTile.getX(), currTile.getY(), currTile.getWidth(), currTile.getHeight());
 					}
 					//Checkpoint
-					if(Level.LIST[currentLvl][i].getState() == 2){
+					if(currTile.getState() == 2){
 						g.setColor(Color.GREEN);
-						g.fillRect( Level.LIST[currentLvl][i].getX(),  Level.LIST[currentLvl][i].getY(),  Level.LIST[currentLvl][i].getWidth(), Level.LIST[currentLvl][i].getHeight());
+						g.fillRect( currTile.getX(), currTile.getY(), currTile.getWidth(), currTile.getHeight());
 					}
 					//Goal
-					if(Level.LIST[currentLvl][i].getState() ==3 ){
+					if(currTile.getState() == 3 ){
 						g.setColor(Color.CYAN);
-						g.fillRect( Level.LIST[currentLvl][i].getX(),  Level.LIST[currentLvl][i].getY(),  Level.LIST[currentLvl][i].getWidth(), Level.LIST[currentLvl][i].getHeight());
+						g.fillRect( currTile.getX(), currTile.getY(), currTile.getWidth(), currTile.getHeight());
 					}
 				}
 				//draws the character
@@ -91,11 +91,11 @@ public class Main extends JFrame{
 		//uses maximizedBounds and Extended state to fit the window to the screen
 		setMaximizedBounds(getMaximizedBounds());
 		setExtendedState(JFrame.MAXIMIZED_BOTH );
-		// sets the Icon
-		setIconImage(img.getImage());
+		// sets the Icon for the top left and the task bar
+		setIconImage(icon.getImage());
 		setVisible(true);
-		add(pane);
-		setDefaultCloseOperation(3);
+		add(panel);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addKeyListener(new KeyListener(){
 
 			@Override
@@ -174,7 +174,7 @@ public class Main extends JFrame{
 				character = new ImageIcon("resources/platformer/BidoofIdle"+direction+binary+".png");	
 			}
 			// running animations
-			else if(plr.getVelX() != 0&&ctr%15 ==  0&&inary ==  1){
+			else if(plr.getVelX() != 0&&ctr%20 ==  0&&inary ==  1){
 				//flip flops binary
 				if(binary ==  0){
 					binary = 1;
@@ -188,18 +188,18 @@ public class Main extends JFrame{
 			//collision for left and right sides of blocks called
 			collisionLR();
 			//velocities added to x and y values
-			if(plr.getVelY()<8&&ctr%2 ==  0){
+			if(plr.getVelY() < 8 && ctr % 2 ==  0){
 				plr.setVelY(plr.getVelY()+1);
 			}
 			plr.setxPos(plr.getxPos()+plr.getVelX());
-			if(dunworry){
+			if(move){
 				plr.setyPos(plr.getyPos()+plr.getVelY());
 			}
 			//collision for top and bottom sides of blocks called
 			collision();
 	
 			try {
-				Thread.sleep(13);
+				Thread.sleep(10);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -210,11 +210,11 @@ public class Main extends JFrame{
 		}
 	}
 	public void collision(){
-		//in majority the if statements are the same its what they run based on the object that differs
+		//Checks for collision with various tile types and runs certain commands
 				//for loop runs through each object in the constant level list
-		for(int i = 0; i<Level.LIST[currentLvl].length; i++){
+		for(int i = 0; i < level.get(currentLvl).size(); i++){
 			//keeps track of current object to make if statements much shorter
-			Tile obj = Level.LIST[currentLvl][i];
+			Tile obj = (Tile) level.get(currentLvl).get(i);
 			//blocks
 			if(obj.getState()==0){
 				if(plr.getyPos() < obj.getY() + obj.getHeight() && plr.getyPos() > obj.getY() + obj.getHeight() - 9 && plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() + 45 > obj.getX() ){
@@ -223,13 +223,13 @@ public class Main extends JFrame{
 					//bottom
 				}
 				if(plr.getyPos() + plr.getVelY() + 30 > obj.getY()&&plr.getyPos() + plr.getVelY() < obj.getY() && plr.getxPos() + 44 > obj.getX() && plr.getxPos() < obj.getX() + obj.getWidth()){
-					dunworry = false;
+					move = false;
 					plr.setyPos( obj.getY()-30);
 					inary = 1;
 					//top
 				}
 				else{
-					dunworry = true;
+					move = true;
 				}
 			}
 			//lava
@@ -249,14 +249,14 @@ public class Main extends JFrame{
 					//top
 				}
 				else{
-					dunworry = true;
+					move = true;
 				}
 				//checkpoints
 				if(obj.getState() == 2){
 					if(plr.getyPos() < obj.getY() + obj.getHeight() && plr.getyPos() > obj.getY() + obj.getHeight() - 9 && plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() + 45 > obj.getX() ){
 						spawnX=(int)((Checkpoint) obj).getSpawnX();
 						spawnY=(int)((Checkpoint) obj).getSpawnY();
-						//bottom11
+						//bottom
 					}
 					if(plr.getyPos() + 30 > obj.getY()&&plr.getyPos() + plr.getVelY() < obj.getY() && plr.getxPos() + 44 > obj.getX() && plr.getxPos() < obj.getX() + obj.getWidth()){
 						spawnX=(int)((Checkpoint) obj).getSpawnX();
@@ -264,19 +264,29 @@ public class Main extends JFrame{
 						//top
 					}
 					else{
-						dunworry = true;
+						move = true;
+					}
+				}
+				if(obj.getState() == 3){
+					if(plr.getyPos() < obj.getY() + obj.getHeight() && plr.getyPos() > obj.getY() + obj.getHeight() - 9 && plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() + 45 > obj.getX() ){
+						currentLvl++;
+						//bottom
+					}
+					if(plr.getyPos() + 30 > obj.getY()&&plr.getyPos() + plr.getVelY() < obj.getY() && plr.getxPos() + 44 > obj.getX() && plr.getxPos() < obj.getX() + obj.getWidth()){
+						currentLvl++;
+						//top
+					}
+					else{
+						move = true;
 					}
 				}
 			}
 		}
 	}
 	public void collisionLR(){
-		//in majority the if statements are the same its what they run based on the object that differs
-				//for loop runs through each object in the constant level list
-		for(int i = 0; i<Level.LIST[currentLvl].length; i++){
+		for(int i = 0; i < level.get(currentLvl).size(); i++){
 			//keeps track of current object to make if statements much shorter
-			Tile obj  =  Level.LIST[currentLvl][i];
-			//blocks
+			Tile obj  =  (Tile) level.get(currentLvl).get(i); 
 			if(obj.getState() == 0){
 				if(plr.getxPos()+plr.getVelX() + 44 > obj.getX() && plr.getxPos()+plr.getVelX() + 44 < obj.getX() + 6 && plr.getyPos() + 30 > obj.getY() && plr.getyPos () < obj.getY() + obj.getHeight() ){
 					plr.setxPos(plr.getxPos() - 4);
@@ -317,7 +327,18 @@ public class Main extends JFrame{
 					//right
 				}
 			}
-			
+			if(obj.getState() == 3){
+				if(plr.getxPos() + 44 > obj.getX() && plr.getxPos() + 44 < obj.getX() + 6 && plr.getyPos() + 30 > obj.getY() && plr.getyPos () < obj.getY() + obj.getHeight() ){
+					currentLvl++;
+					System.out.println("rawr");
+					//left 
+				}
+				if(plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() > obj.getX() + obj.getWidth() - 6 && plr.getyPos() + 30 > obj.getY() && plr.getyPos() < obj.getY() + obj.getHeight() ){
+					currentLvl++;
+					System.out.println("rawr");
+					//right
+				}
+			}
 		}
 	}
 }
