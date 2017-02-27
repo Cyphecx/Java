@@ -108,12 +108,15 @@ public class Main extends JFrame{
 				if(e.getKeyCode() ==  KeyEvent.VK_RIGHT||e.getKeyCode() ==  KeyEvent.VK_D){
 					right = true;
 				}
+				if(e.getKeyCode() ==  KeyEvent.VK_W){
+					plr.setyPos(700);
+				}
 				//Left direction movement
 				if(e.getKeyCode() ==  KeyEvent.VK_LEFT||e.getKeyCode() ==  KeyEvent.VK_A){
 					left  =   true;
 				}
 				//Jumping keys
-				if(e.getKeyCode() ==  KeyEvent.VK_UP||e.getKeyCode() ==  KeyEvent.VK_SPACE||e.getKeyCode() ==  KeyEvent.VK_W){
+				if(e.getKeyCode() ==  KeyEvent.VK_UP||e.getKeyCode() ==  KeyEvent.VK_SPACE){
 					jump = true;
 				}
 			}
@@ -217,6 +220,7 @@ public class Main extends JFrame{
 			Tile obj = (Tile) level.get(currentLvl).get(i);
 			//blocks
 			if(obj.getState()==0){
+				
 				if(plr.getyPos() < obj.getY() + obj.getHeight() && plr.getyPos() > obj.getY() + obj.getHeight() - 9 && plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() + 45 > obj.getX() ){
 					plr.setyPos(obj.getY()+obj.getHeight());
 					plr.setVelY(0);
@@ -251,34 +255,37 @@ public class Main extends JFrame{
 				else{
 					move = true;
 				}
-				//checkpoints
-				if(obj.getState() == 2){
-					if(plr.getyPos() < obj.getY() + obj.getHeight() && plr.getyPos() > obj.getY() + obj.getHeight() - 9 && plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() + 45 > obj.getX() ){
-						spawnX=(int)((Checkpoint) obj).getSpawnX();
-						spawnY=(int)((Checkpoint) obj).getSpawnY();
-						//bottom
-					}
-					if(plr.getyPos() + 30 > obj.getY()&&plr.getyPos() + plr.getVelY() < obj.getY() && plr.getxPos() + 44 > obj.getX() && plr.getxPos() < obj.getX() + obj.getWidth()){
-						spawnX=(int)((Checkpoint) obj).getSpawnX();
-						spawnY=(int)((Checkpoint) obj).getSpawnY();
-						//top
-					}
-					else{
-						move = true;
-					}
+			}
+			//checkpoints
+			if(obj.getState() == 2){
+				if(plr.getyPos() < obj.getY() + obj.getHeight() && plr.getyPos() > obj.getY() + obj.getHeight() - 9 && plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() + 45 > obj.getX() ){
+					spawnX=(int)((Checkpoint) obj).getSpawnX();
+					spawnY=(int)((Checkpoint) obj).getSpawnY();
+					//bottom
 				}
-				if(obj.getState() == 3){
-					if(plr.getyPos() < obj.getY() + obj.getHeight() && plr.getyPos() > obj.getY() + obj.getHeight() - 9 && plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() + 45 > obj.getX() ){
-						currentLvl++;
-						//bottom
-					}
-					if(plr.getyPos() + 30 > obj.getY()&&plr.getyPos() + plr.getVelY() < obj.getY() && plr.getxPos() + 44 > obj.getX() && plr.getxPos() < obj.getX() + obj.getWidth()){
-						currentLvl++;
-						//top
-					}
-					else{
-						move = true;
-					}
+				if(plr.getyPos() + 30 > obj.getY()&&plr.getyPos() + plr.getVelY() < obj.getY() && plr.getxPos() + 44 > obj.getX() && plr.getxPos() < obj.getX() + obj.getWidth()){
+					spawnX=(int)((Checkpoint) obj).getSpawnX();
+					spawnY=(int)((Checkpoint) obj).getSpawnY();
+					//top
+				}
+				else{
+					move = true;
+				}
+			}
+	
+			//checkpoints
+			if(obj.getState() == 3){
+				System.out.println(plr.getyPos() < obj.getY() + obj.getHeight());
+				System.out.println(plr.getyPos() > obj.getY() + obj.getHeight() - 9);
+				System.out.println(plr.getxPos() < obj.getX() + obj.getWidth());
+				System.out.println(plr.getxPos() + 45 > obj.getX() );
+				if(plr.getyPos() < obj.getY() + obj.getHeight() && plr.getyPos() > obj.getY() + obj.getHeight() - 9 && plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() + 45 > obj.getX() ){
+					currentLvl++;
+					//bottom
+				}
+				if(plr.getyPos() + 30 > obj.getY()&&plr.getyPos() + plr.getVelY() < obj.getY() && plr.getxPos() + 44 > obj.getX() && plr.getxPos() < obj.getX() + obj.getWidth()){
+					currentLvl++;
+					//top
 				}
 			}
 		}
@@ -328,14 +335,12 @@ public class Main extends JFrame{
 				}
 			}
 			if(obj.getState() == 3){
-				if(plr.getxPos() + 44 > obj.getX() && plr.getxPos() + 44 < obj.getX() + 6 && plr.getyPos() + 30 > obj.getY() && plr.getyPos () < obj.getY() + obj.getHeight() ){
+				if(plr.getxPos() + 44 > obj.getX() && plr.getxPos() + 44 < obj.getX() + 6 && plr.getxPos() + 44 < obj.getX() + 6&& plr.getyPos() < obj.getY() + obj.getHeight() ){
 					currentLvl++;
-					System.out.println("rawr");
 					//left 
 				}
 				if(plr.getxPos() < obj.getX() + obj.getWidth() && plr.getxPos() > obj.getX() + obj.getWidth() - 6 && plr.getyPos() + 30 > obj.getY() && plr.getyPos() < obj.getY() + obj.getHeight() ){
 					currentLvl++;
-					System.out.println("rawr");
 					//right
 				}
 			}
