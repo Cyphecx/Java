@@ -11,11 +11,11 @@ public class Matrix {
 		data = new float[m][n];
 	}
 
-	public void dataSetter(int m, int n, float input){
+	public void set(int m, int n, float input){
 		data[m][n] = input;
 	}
 
-	public float dataGetter(int m, int n){
+	public float get(int m, int n){
 		return data[m][n];
 	}
 
@@ -67,6 +67,12 @@ public class Matrix {
 			currR++;
 		}
 	}
+	public int height(){
+		return data[0].length;
+	}
+	public int width(){
+		return data.length;
+	}
 	public String size(){
 		return "Rows: "+data.length+" Columns: "+data[0].length;
 	}
@@ -78,5 +84,18 @@ public class Matrix {
 			System.out.println("");
 		}
 		System.out.println("");
+	}
+	public Matrix matrixMulti(Matrix inMa1, Matrix inMa2) throws MatrixSizeMismatch{
+		Matrix matrix = new Matrix(inMa1.height(), inMa2.width());
+		for(int i = 0; i < inMa1.width(); i++){
+			for(int z = 0; z < inMa2.height(); z++){
+				
+			}
+		}
+		if(inMa1.width() != inMa2.height()){
+			throw new MatrixSizeMismatch("2==2");
+		}
+		//return this;
+		return matrix;
 	}
 }
