@@ -79,7 +79,12 @@ public class Matrix {
 	public void printMatrix(){
 		for(int i = 0; i < data.length; i++){
 			for(int z = 0; z < data[i].length; z++){
-				System.out.print(data[i][z]+",");
+				if(data[i][z] % 1 == 0){
+					System.out.print((int)data[i][z] + ",");
+				}
+				else{
+					System.out.print(data[i][z]+",");
+				}
 			}
 			System.out.println("");
 		}
@@ -87,9 +92,13 @@ public class Matrix {
 	}
 	public Matrix matrixMulti(Matrix inMa1, Matrix inMa2) throws MatrixSizeMismatch{
 		Matrix matrix = new Matrix(inMa1.height(), inMa2.width());
-		for(int i = 0; i < inMa1.width(); i++){
-			for(int z = 0; z < inMa2.height(); z++){
-				
+		for(int i = 0; i < inMa2.height(); i++){
+			for(int z = 0; z < inMa1.width(); z++){
+				float num = 0;
+				for(int x = 0; x < inMa1.width(); x++){
+					num = num + inMa1.get(i, x) * inMa2.get(x, z);
+				}
+				matrix.set(i, z, num);
 			}
 		}
 		if(inMa1.width() != inMa2.height()){

@@ -1,5 +1,7 @@
 package projectEuler;
 
+import java.util.Scanner;
+
 /*In the 20×20 grid below, four numbers along a diagonal line have been marked in red.
 
 *LARGE GRID OMMITED FOR CLUTTER REASONS*
@@ -33,7 +35,9 @@ public class q11 {
 	};
 	
 	public static void main(String[] args) {
-		
+		Scanner scan = new Scanner(System.in);
+		String z = scan.nextLine();
+		System.out.println(z);
 		for(int i = 0; i < grid.length; i++){
 			for(int x = 0; x < grid[i].length; x++){
 				System.out.print(grid[i][x]+", ");

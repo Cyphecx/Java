@@ -109,7 +109,7 @@ public class Main extends JFrame{
 					right = true;
 				}
 				if(e.getKeyCode() ==  KeyEvent.VK_W){
-					plr.setyPos(200);
+					plr.setyPos(700);
 				}
 				//Left direction movement
 				if(e.getKeyCode() ==  KeyEvent.VK_LEFT||e.getKeyCode() ==  KeyEvent.VK_A){
