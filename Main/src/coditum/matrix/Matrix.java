@@ -3,24 +3,24 @@ package coditum.matrix;
 import java.util.Scanner;
 
 public class Matrix {
-	private float m;
-	private float n;
+	private int m;
+	private int n;
 	private int m1;
 	private int n1;
 	float[][] data;
 
-	public Matrix(int m, int n){
+	public Matrix(int n, int m){
 		this.m = m;
 		this.n = n;
-		data = new float[m][n];
+		data = new float[n][m];
 	}
 
-	public void set(int m, int n, float input){
-		data[m][n] = input;
+	public void set(int n, int m, float input){
+		data[n][m] = input;
 	}
 
-	public float get(int m, int n){
-		return data[m][n];
+	public float get(int n, int m){
+		return data[n][m];
 	}
 
 	public void rowSub(int row1, int row2, float scalar){
@@ -131,14 +131,21 @@ public class Matrix {
 				while(input.charAt(end) != ','){
 					end++;
 				}
-				
+				data[n][m] = Integer.parseInt(input.substring(i, end));
+				i = end;
 			}
 		
 		}
 	}
 	public void iterator(){
-		if(n1 == this.n1){
-			
+		if(n1+1 == this.n){
+			n1 = 0;
+			if(m1+2 != this.m){
+				m++;
+			}
+		}
+		else{
+			n1++;
 		}
 	}
 }
