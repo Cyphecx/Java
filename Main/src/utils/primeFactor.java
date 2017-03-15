@@ -3,9 +3,8 @@ package utils;
 import java.util.ArrayList;
 
 public class primeFactor {
-	static ArrayList ans = new ArrayList();
-	public static ArrayList factor(long n){
-		long i = 2;
+	static ArrayList<Long> ans = new ArrayList<Long>();
+	public static ArrayList<Long> factor(long n){
 		long num = 2;
 		while(n % num != 0){
 			num++;
@@ -25,13 +24,9 @@ public class primeFactor {
 		return ans;
 	}
 	public static void factor2(long n){
-		long i = 2;
 		long num = 2;
 		while(n % num != 0){
-			if(n % i == 0){
-				num = i;
-			}
-			i++;
+			num++;
 		}
 		if(checkPrime.isPrime2(num)){
 			ans.add(num);
