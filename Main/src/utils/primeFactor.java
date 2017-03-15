@@ -20,7 +20,7 @@ public class primeFactor {
 			ans.add(n/num);
 		}
 		else{
-			factor2(n/num);
+			factor2(n/num); 
 		}
 		return ans;
 	}
