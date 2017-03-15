@@ -8,10 +8,7 @@ public class primeFactor {
 		long i = 2;
 		long num = 2;
 		while(n % num != 0){
-			if(n % i == 0){
-				num = i;
-			}
-			i++;
+			num++;
 		}
 		if(checkPrime.isPrime2(num)){
 			ans.add(num);
