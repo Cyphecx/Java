@@ -6,22 +6,20 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigInteger;
-
-//Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
+import java.util.ArrayList;
 
 public class q13 {
-
-	public static void main(String[] args) throws IOException {
-		BufferedReader read = new BufferedReader(new FileReader(new File("resources/euler/150digitnum_q13")));
-		String largeNum = "";
-		String x;
-		while((x = read.readLine())!= null){
-			largeNum = largeNum + x; 
+	public static void main(String[] args) throws IOException{
+		BufferedReader reader = new BufferedReader(new FileReader(new File("resources/euler/150digitnum_q13")));
+		ArrayList<BigInteger> nums = new ArrayList<BigInteger>();
+		String x = "";
+		while(!((x = reader.readLine()) == null)){
+			nums.add(new BigInteger(x));
 		}
-		System.out.print(largeNum);
-		BigInteger sum = BigInteger.ZERO;
-
-
+		BigInteger ans = new BigInteger("0");
+		for(BigInteger i : nums){
+			ans = ans.add(i);
+		}
+		System.out.println(ans);
 	}
-
 }
