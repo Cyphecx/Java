@@ -21,5 +21,6 @@ public class q13 {
 			ans = ans.add(i);
 		}
 		System.out.println(ans);
+		
 	}
 }
