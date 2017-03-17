@@ -5,8 +5,6 @@ import java.util.Scanner;
 public class Matrix {
 	private int m;
 	private int n;
-	private int m1;
-	private int n1;
 	float[][] data;
 
 	public Matrix(int n, int m){
@@ -120,8 +118,8 @@ public class Matrix {
 		return matrix;
 	}
 	public void getInput(){
-		m1 = 0;
-		n1 = 0;
+		int m1 = 0;
+		int n1 = 0;
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Please enter an array in the format [data, data, data... ;(New Line) data, data, data...] for an array size: " + n + "x" + m);
 		String input = scan.nextLine();
@@ -131,21 +129,24 @@ public class Matrix {
 				while(input.charAt(end) != ','){
 					end++;
 				}
-				data[n][m] = Integer.parseInt(input.substring(i, end));
+				data[n1][m1] = Integer.parseInt(input.substring(i, (end-1)));
+				n1++;
+				i = end;
+			}
+			if(input.charAt(i) == ','){
+				int end = i+1;
+				while(input.charAt(end) != ',' && input.charAt(end) != ';'){
+					end++;
+				}
+				data[n1][m1] = Float.parseFloat(input.substring(i, (end-1)));
+				n1++;
+				if(input.charAt(end) == ';'){
+					
+				}
 				i = end;
 			}
 		
 		}
 	}
-	public void iterator(){
-		if(n1+1 == this.n){
-			n1 = 0;
-			if(m1+2 != this.m){
-				m++;
-			}
-		}
-		else{
-			n1++;
-		}
-	}
+	
 }
