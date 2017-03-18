@@ -80,18 +80,18 @@ public class Matrix {
 			for(int z = 0; z < data[i].length; z++){
 				if(z == data[i].length-1){
 					if(data[i][z] % 1 == 0){
-						System.out.print((int)data[i][z]);
+						System.out.print((int)data[z][i]);
 					}
 					else{
-						System.out.print(data[i][z]);
+						System.out.print(data[z][i]);
 					}
 				}
 				else{
 					if(data[i][z] % 1 == 0){
-						System.out.print((int)data[i][z] + ",");
+						System.out.print((int)data[z][i] + ",");
 					}
 					else{
-						System.out.print(data[i][z]+",");
+						System.out.print(data[z][i]+",");
 					}
 				}
 			}
@@ -117,36 +117,60 @@ public class Matrix {
 		//return this;
 		return matrix;
 	}
-	public void getInput(){
+	public void getInput() throws MatrixSizeMismatch{
 		int m1 = 0;
 		int n1 = 0;
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Please enter an array in the format [data, data, data... ;(New Line) data, data, data...] for an array size: " + n + "x" + m);
 		String input = scan.nextLine();
-		for(int i = 0; i < input.length(); i++){
-			if(input.charAt(i) == '['){
-				int end = i;
-				while(input.charAt(end) != ','){
-					end++;
-				}
-				data[n1][m1] = Integer.parseInt(input.substring(i, (end-1)));
-				n1++;
-				i = end;
-			}
+		System.out.println(input);
+		int start = 1;
+		for(int i = 1; i < input.length(); i++){
 			if(input.charAt(i) == ','){
-				int end = i+1;
-				while(input.charAt(end) != ',' && input.charAt(end) != ';'){
-					end++;
+				System.out.println(input.substring(start,i));
+				try {
+					data[n1][m1] = Float.parseFloat(input.substring(start, i));
+				} catch (ArrayIndexOutOfBoundsException e) {
+					throw new MatrixSizeMismatch("");
 				}
-				data[n1][m1] = Float.parseFloat(input.substring(i, (end-1)));
+				start = i + 1;
 				n1++;
-				if(input.charAt(end) == ';'){
-					
-				}
-				i = end;
 			}
-		
+			else if(input.charAt(i) == ';'){
+				System.out.println(input.substring(start,i));
+				try {
+					data[n1][m1] = Float.parseFloat(input.substring(start, i));
+				} catch (ArrayIndexOutOfBoundsException e) {
+					throw new MatrixSizeMismatch("");
+				}
+				start = i + 1;
+				m1++;
+				n1 = 0;
+			}
+			else  if(input.charAt(i) == ']'){
+				System.out.println(input.substring(start,i));
+				try {
+					data[n1][m1] = Float.parseFloat(input.substring(start, i));
+				} catch (ArrayIndexOutOfBoundsException e) {
+					throw new MatrixSizeMismatch("");
+				}
+				break;
+			}
+			
 		}
+	}
+	public boolean equals(Matrix m) throws MatrixSizeMismatch{
+		if(this.height() != m.height() || this.width() !=  m.width()){
+			throw new MatrixSizeMismatch(this.size() + " != " + m.size());
+		}
+		for(int i = 0; i < this.height(); i++){
+			for(int z = 0; z < this.width(); z++){
+				if(this.get(z,1) != m.get(z, i)){
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 }
