@@ -123,11 +123,9 @@ public class Matrix {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Please enter an array in the format [data, data, data... ;(New Line) data, data, data...] for an array size: " + n + "x" + m);
 		String input = scan.nextLine();
-		System.out.println(input);
 		int start = 1;
 		for(int i = 1; i < input.length(); i++){
 			if(input.charAt(i) == ','){
-				System.out.println(input.substring(start,i));
 				try {
 					data[n1][m1] = Float.parseFloat(input.substring(start, i));
 				} catch (ArrayIndexOutOfBoundsException e) {
@@ -137,7 +135,6 @@ public class Matrix {
 				n1++;
 			}
 			else if(input.charAt(i) == ';'){
-				System.out.println(input.substring(start,i));
 				try {
 					data[n1][m1] = Float.parseFloat(input.substring(start, i));
 				} catch (ArrayIndexOutOfBoundsException e) {
@@ -148,7 +145,6 @@ public class Matrix {
 				n1 = 0;
 			}
 			else  if(input.charAt(i) == ']'){
-				System.out.println(input.substring(start,i));
 				try {
 					data[n1][m1] = Float.parseFloat(input.substring(start, i));
 				} catch (ArrayIndexOutOfBoundsException e) {
@@ -172,5 +168,39 @@ public class Matrix {
 		}
 		return true;
 	}
-	
+	public double determinant() throws MatrixSizeMismatch{
+		if(this.width() != this.height()){
+			throw new MatrixSizeMismatch("Matrix is not square");
+		}
+		if(this.height() == 2){
+			double out = (this.get(0, 0) * this.get(1, 1)) - this.get(0, 1) * this.get(1, 0);
+			return out;
+		}
+		return (Double) null;
+	}
+	public Matrix invert(){
+		return null;
+	}
+	public Matrix subMatrix(int n, int m){
+		int x = 0;
+		int y = 0;
+		Matrix out = new Matrix(this.width() - 1,this.height() - 1);
+		for(int i = 0; i < this.width(); i++){
+			for(int z = 0; z < this.height(); z++){
+				if(i != n && z != m){
+					System.out.println(x + ", " + y +" "+ out.size());
+					out.set(x, y, this.get(i, z));
+					if(y >= out.height()-1){
+						y = 0;
+						x++;
+					}
+					else{
+						y++;
+					}
+				}
+			}
+		}
+		return out;
+		
+	}
 }
