@@ -10,7 +10,7 @@ public class q15 {
 	public static void main(String[] args) {
 		BigInteger n = factorial(new BigInteger("40"));
 		BigInteger k = factorial(new BigInteger("20"));
-		System.out.println("There are: "+n.divide((k.multiply( k))) + " combinations");
+		System.out.println("There are: "+n.divide((k.multiply( k))) + " fcombinations");
 	}
 	public static BigInteger factorial(BigInteger in){
 		if(in.longValue() > 1){
