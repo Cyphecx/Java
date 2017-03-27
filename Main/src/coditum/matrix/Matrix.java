@@ -193,14 +193,19 @@ public class Matrix {
 		return id;
 	}
 	public double determinant() throws MatrixSizeMismatch{
-		if(this.width() != this.height()){
-			throw new MatrixSizeMismatch("Matrix is not square");
+		double determ = 0;
+		if(this.height() != this.width()){
+			throw new MatrixSizeMismatch("Matrix is not Square");
 		}
-		if(this.height() == 2){
-			double out = (this.get(0, 0) * this.get(1, 1)) - this.get(0, 1) * this.get(1, 0);
-			return out;
+		
+		return determ;
+	}
+	public double determinant(double determ) throws MatrixSizeMismatch{
+		if(this.height() != this.width()){
+			throw new MatrixSizeMismatch("Matrix is not Square");
 		}
-		return (Double) null;
+		
+		return determ;
 	}
 	public Matrix invert(){
 		return null;
