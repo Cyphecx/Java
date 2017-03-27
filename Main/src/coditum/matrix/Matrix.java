@@ -1,5 +1,6 @@
 package coditum.matrix;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Matrix {
@@ -67,10 +68,10 @@ public class Matrix {
 		}
 	}
 	public int height(){
-		return data[0].length;
+		return this.m;
 	}
 	public int width(){
-		return data.length;
+		return this.n;
 	}
 	public String size(){
 		return "Rows: "+data.length+" Columns: "+data[0].length;
@@ -168,6 +169,29 @@ public class Matrix {
 		}
 		return true;
 	}
+	static public Matrix randomMatrix(int n, int m){
+		Matrix output = new Matrix(n,m);
+		int rand = 0;
+		if(Math.floor(Math.random()+1) == 0){
+			rand = -100;
+		}
+		else{
+			rand = 100;
+		}
+		for(int i = 0; i < n; i++){
+			for(int k = 0; k < m; k++){
+				output.set(i, k, (float) Math.floor((float)(Math.random() * rand)));
+			} 
+		}
+		return output;
+	}
+	static public Matrix identityGen(int n){
+		Matrix id = new Matrix(n,n);
+		for(int i = 0; i < n; i++){
+			id.set(i, i, 1);
+		}
+		return id;
+	}
 	public double determinant() throws MatrixSizeMismatch{
 		if(this.width() != this.height()){
 			throw new MatrixSizeMismatch("Matrix is not square");
@@ -182,22 +206,20 @@ public class Matrix {
 		return null;
 	}
 	public Matrix subMatrix(int n, int m){
-		int x = 0;
-		int y = 0;
-		Matrix out = new Matrix(this.width() - 1,this.height() - 1);
+		Matrix out = new Matrix(this.width()-1, this.height()-1);
+		ArrayList<Float> nums = new ArrayList<Float>();
 		for(int i = 0; i < this.width(); i++){
-			for(int z = 0; z < this.height(); z++){
-				if(i != n && z != m){
-					System.out.println(x + ", " + y +" "+ out.size());
-					out.set(x, y, this.get(i, z));
-					if(y >= out.height()-1){
-						y = 0;
-						x++;
-					}
-					else{
-						y++;
-					}
+			for(int k = 0; k < this.height(); k++){
+				if(i != n && k != m){
+					nums.add(this.get(i, k));
 				}
+			}
+		}
+		int ctr = 0;
+		for(int i = 0; i < out.width(); i++){
+			for(int k = 0; k < out.height(); k++){
+				out.set(i, k, nums.get(ctr));
+				ctr++;
 			}
 		}
 		return out;
