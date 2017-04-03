@@ -31,34 +31,35 @@ public class Matrix {
 		boolean finished = false;
 		int currR = 0;
 		while(!finished){
-			if(currR > data.length - 1){
+			if(currR > this.data.length - 1){
 				System.exit(0);
 			}
 			float[] temp;
 			finished = true;
-			for(int i = 0; i < data.length; i++){
-				if(data[i][i] != 1){
+			for(int i = 0; i < this.height(); i++){
+				
+				if(this.data[i][i] != 1){
 					finished = false;
 				}
 			}
-			for(int i = currR; i < data.length; i++){
-				if(data[i][currR] != 0){
-					temp = new float[data[i].length];
-					for(int z = 0; z < data[i].length; z++){
-						temp[z] = data[i][z];
+			for(int i = currR; i < this.height(); i++){
+				if(this.data[i][currR] != 0){
+					temp = new float[this.data[i].length];
+					for(int z = 0; z < this.data[i].length; z++){
+						temp[z] = this.data[i][z];
 					}
-					for(int z = 0; z < data[i].length; z++){
-						data[i][z] = data[currR][z];
+					for(int z = 0; z < this.data[i].length; z++){
+						this.data[i][z] = this.data[currR][z];
 					}
-					for(int z = 0; z < data[i].length; z++){
-						data[currR][z] = temp[z];
+					for(int z = 0; z < this.data[i].length; z++){
+						this.data[currR][z] = temp[z];
 					}
-					for(int z = 0; z < data.length; z++){
+					for(int z = 0; z < this.data.length; z++){
 						if(z != currR){
-							rowSub(z,currR,data[z][currR] / data[currR][currR]);
+							rowSub(z,currR,this.data[z][currR] / this.data[currR][currR]);
 						}
-						else if (data[z][currR] != 1){
-							rowSub(z, currR, 1 - 1/data[currR][currR]);
+						else if (this.data[z][currR] != 1){
+							rowSub(z, currR, 1 - 1/this.data[currR][currR]);
 						}
 					}
 					break;
@@ -76,23 +77,23 @@ public class Matrix {
 	public String size(){
 		return "Rows: "+data.length+" Columns: "+data[0].length;
 	}
-	public void printMatrix(){
-		for(int i = 0; i < data.length; i++){
-			for(int z = 0; z < data[i].length; z++){
-				if(z == data[i].length-1){
-					if(data[i][z] % 1 == 0){
-						System.out.print((int)data[z][i]);
+	public static void printMatrix(Matrix in){
+		for(int z = 0; z < in.height(); z++){
+			for(int i = 0; i < in.width(); i++){
+				if(z == in.width()-1){
+					if(in.get(i, z) % 1 == 0){
+						System.out.print((int)in.get(i, z));
 					}
 					else{
-						System.out.print(data[z][i]);
+						System.out.print(in.get(i, z));
 					}
 				}
 				else{
-					if(data[i][z] % 1 == 0){
-						System.out.print((int)data[z][i] + ",");
+					if(in.get(i, z) % 1 == 0){
+						System.out.print((int)in.get(i, z) + ",");
 					}
 					else{
-						System.out.print(data[z][i]+",");
+						System.out.print(in.get(i, z) + ",");
 					}
 				}
 			}
@@ -197,18 +198,53 @@ public class Matrix {
 		if(this.height() != this.width()){
 			throw new MatrixSizeMismatch("Matrix is not Square");
 		}
-		
+		if(this.height() <=1){
+			throw new MatrixSizeMismatch("Matrix too Small");
+		}
+		if(this.width() == 2){
+			determ = this.get(0, 0) * this.get(1, 1) - this.get(0, 1) * this.get(1, 0);
+		}
+		else{
+			for(int i = 0; i < this.width(); i++){
+				if((i + 1) % 2 == 0){
+					determ = determ - this.get(0, i) * this.subMatrix(0, i).determinant();
+				}
+				else{
+					determ = determ + this.get(0, i) * this.subMatrix(0, i).determinant();
+				}
+			}
+		}
 		return determ;
 	}
 	public double determinant(double determ) throws MatrixSizeMismatch{
 		if(this.height() != this.width()){
 			throw new MatrixSizeMismatch("Matrix is not Square");
 		}
-		
+		if(this.width() == 2){
+			determ = this.get(0, 0) * this.get(1, 1) - this.get(0, 1) * this.get(1, 0);
+		}
+		else{
+			for(int i = 0; i < this.width(); i++){
+				if((i + 1) % 2 == 0){
+					determ = determ - this.get(0, i) * this.subMatrix(0, i).determinant();
+				}
+				else{
+					determ = determ + this.get(0, i) * this.subMatrix(0, i).determinant();
+				}
+			}
+		}
 		return determ;
 	}
-	public Matrix invert(){
-		return null;
+	public static Matrix invert(Matrix in){
+		Matrix identity = Matrix.identityGen(in.height());
+		Matrix working = new Matrix(in.width()*2 , in.height());
+		for(int i = 0; i < in.height(); i++){
+			for(int z = 0; z < in.width(); z++){
+				working.set(i, z, in.get(i, z));
+				working.set(i + in.height(), z, identity.get(i, z));
+			}
+		}
+		return working;
 	}
 	public Matrix subMatrix(int n, int m){
 		Matrix out = new Matrix(this.width()-1, this.height()-1);

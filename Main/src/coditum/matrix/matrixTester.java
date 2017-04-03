@@ -1,9 +1,15 @@
 package coditum.matrix;
 public class matrixTester{
 	public static void main(String[] args) throws MatrixSizeMismatch{
-		Matrix m = Matrix.randomMatrix(3,3);
-		m.printMatrix();
+		//Matrix m = Matrix.randomMatrix(3,3);
+		Matrix m = new Matrix(3,3);
+		m.getInput();
+		Matrix.printMatrix(m);
 		System.out.println("---------------------------------------------------------");
-		m.subMatrix(1, 0).printMatrix();
+		Matrix worker = Matrix.invert(m);
+		Matrix.printMatrix(worker);
+		worker.gaussian();
+		System.out.println("---------------------------------------------------------");
+		Matrix.printMatrix(worker);
 	}
 }
