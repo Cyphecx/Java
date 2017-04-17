@@ -31,21 +31,20 @@ public class Matrix {
 		boolean finished = false;
 		int currR = 0;
 		while(!finished){
-			if(currR > this.data.length - 1){
-				System.exit(0);
+			if(currR > this.height() - 1){
+				return;
 			}
 			float[] temp;
 			finished = true;
-			for(int i = 0; i < this.height(); i++){
-				
-				if(this.data[i][i] != 1){
+			for(int i = 0; i < this.height(); i++){	
+				if(this.get(i,i) != 1){
 					finished = false;
 				}
 			}
 			for(int i = currR; i < this.height(); i++){
-				if(this.data[i][currR] != 0){
-					temp = new float[this.data[i].length];
-					for(int z = 0; z < this.data[i].length; z++){
+				if(this.get(i, currR) != 0){
+					temp = new float[this.width()];
+					for(int z = 0; z < this.width(); z++){
 						temp[z] = this.data[i][z];
 					}
 					for(int z = 0; z < this.data[i].length; z++){
@@ -80,7 +79,7 @@ public class Matrix {
 	public static void printMatrix(Matrix in){
 		for(int z = 0; z < in.height(); z++){
 			for(int i = 0; i < in.width(); i++){
-				if(z == in.width()-1){
+				if(i == in.width()-1){
 					if(in.get(i, z) % 1 == 0){
 						System.out.print((int)in.get(i, z));
 					}

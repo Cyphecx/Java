@@ -8,6 +8,7 @@ public class matrixTester{
 		System.out.println("---------------------------------------------------------");
 		Matrix worker = Matrix.invert(m);
 		Matrix.printMatrix(worker);
+		
 		worker.gaussian();
 		System.out.println("---------------------------------------------------------");
 		Matrix.printMatrix(worker);
