@@ -10,27 +10,9 @@ import java.util.ArrayList;
 
 public class q3 {
 	public static void main(String[] args){
-		ArrayList<Long> answer = primeFactorFinder(600851475143L);
-		System.out.println(answer);
-	}
-	public static ArrayList<Long> primeFactorFinder(long num){
-		ArrayList<Long> primeFactors = new ArrayList<Long>();
-		for(long i = 1; i < num; i++){
-			if(num % i == 0 && primeCheck(i) && i % 7 != 0){
-				primeFactors.add(i);
-			}
-			if(i % 100000000 == 0)
-				System.out.println(i);
+		ArrayList<Long> list = utils.primeFactor.factor(600851475143L);
+		for(Long i : list){
+			System.out.println("Factor: " + i);
 		}
-		return primeFactors;
-		
-	}
-	public static boolean primeCheck(long num){
-		for(long i = 2; i<num; i++){
-			if(num % i == 0){
-				return false;
-			}
-		}
-		return true;
 	}
 }
