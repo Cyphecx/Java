@@ -17,6 +17,7 @@ public class Working extends Thread{
 	}
 	
 	public void run(){
+		System.out.println("asdasda");
 		try {
 			in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 			out = new PrintWriter(sock.getOutputStream(), true);
@@ -26,6 +27,7 @@ public class Working extends Thread{
 		while(true){
 			String line;
 			try {
+				System.out.println(in.read());
 				while((line = in.readLine()) != null){
 					out.println(line);	
 					System.out.println(line);
@@ -38,8 +40,8 @@ public class Working extends Thread{
 	public int[] retrieveMove() throws IOException{
 		String str = null;
 		try {
-			while((str = in.readLine()) != null){}
-		} catch (IOException e){
+			while(!((str = in.readLine()).equals(null))){}
+		} catch (NullPointerException e){
 			e.printStackTrace();
 		}
 		int[] o = new int[2];
