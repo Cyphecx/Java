@@ -2,16 +2,23 @@ package summer2017;
 
 import java.security.MessageDigest;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
 public class HashMap<T, K> implements Map<T,K>{
-	1
+	LinkedList[] array;
 	public HashMap(){
-		
+		array = new LinkedList[128];
+		for(int i = 0; i < array.length; i++){
+			array[i] = new LinkedList();
+		}
 	}
 	public HashMap(int sSize){
-		
+		array = new LinkedList[sSize];
+		for(int i = 0; i < array.length; i++){
+			array[i] = new LinkedList();
+		}
 	}
 	@Override
 	public void clear() {
