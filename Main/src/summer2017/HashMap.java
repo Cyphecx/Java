@@ -122,7 +122,6 @@ public class HashMap<T, K> implements Map<T,K>{
 	}
 	@Override
 	public Collection values() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
