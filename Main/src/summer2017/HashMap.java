@@ -7,34 +7,38 @@ import java.util.Map;
 import java.util.Set;
 
 public class HashMap<T, K> implements Map<T,K>{
-	LinkedList[] array;
+	private LinkedList[] data;
+	private int size;
+	private final int defaultSize= 128;
 	public HashMap(){
-		array = new LinkedList[128];
-		for(int i = 0; i < array.length; i++){
-			array[i] = new LinkedList();
+		data = new LinkedList[defaultSize];
+		for(int i = 0; i < data.length; i++){
+			data[i] = new LinkedList();
 		}
 	}
 	public HashMap(int sSize){
-		array = new LinkedList[sSize];
-		for(int i = 0; i < array.length; i++){
-			array[i] = new LinkedList();
+		data = new LinkedList[sSize];
+		for(int i = 0; i < data.length; i++){
+			data[i] = new LinkedList();
 		}
 	}
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		data = new LinkedList[defaultSize];
+		for(int i = 0; i < data.length; i++){
+			data[i] = new LinkedList();
+		}
 	}
 
 	@Override
 	public boolean containsKey(Object arg0) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean containsValue(Object arg0) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
@@ -43,11 +47,16 @@ public class HashMap<T, K> implements Map<T,K>{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public K get(Object arg0) {
-		// TODO Auto-generated method stub
+		LinkedList<Data> working = data[Hash((T)arg0)];
+		for(int i = 0; i < working.size(); i++){
+			if(working.get(i).getKey().equals((T)arg0)){
+				return (K) working.get(i).getValue();
+			}
+		}
 		return null;
+		
 	}
 
 	@Override
@@ -63,9 +72,13 @@ public class HashMap<T, K> implements Map<T,K>{
 	}
 
 	@Override
-	public Object put(Object arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		return null;
+	public K put(T arg0, K arg1) {
+		size++;
+		data[Hash(arg0)].add(new Data(arg0,arg1));
+		if(size >= data.length* 0.75){
+			reSize();
+		}
+		return arg1;
 	}
 
 	@Override
@@ -76,16 +89,37 @@ public class HashMap<T, K> implements Map<T,K>{
 
 	@Override
 	public K remove(Object arg0) {
-		// TODO Auto-generated method stub
+		LinkedList<Data> working = data[Hash((T)arg0)];
+		for(int i = 0; i < working.size(); i++){
+			if(working.get(i).getKey().equals((T)arg0)){
+				K t = (K) working.get(i).getValue();
+				size--;
+				working.remove(i);
+				return t;
+			}
+		}
 		return null;
 	}
 
 	@Override
-	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int size(){return size;}
+	
+	public void reSize(){
+		LinkedList<Data> store = new LinkedList<Data>();
+		for(LinkedList i : data){
+			for(Data m : (LinkedList<Data>)(i)){
+				store.add(m);
+			}
+		}
+		data = new LinkedList[data.length*2];
+		for(int i = 0; i < data.length; i++){
+			data[i] = new LinkedList();
+		}
+		for(Data m : store){
+			put((T)m.getKey(), (K)m.getValue());
+			size--;
+		}
 	}
-
 	@Override
 	public Collection values() {
 		// TODO Auto-generated method stub
@@ -93,6 +127,6 @@ public class HashMap<T, K> implements Map<T,K>{
 	}
 	
 	public int Hash(T key){
-		return key.hashCode();
+		return (((int)(Math.pow((double)(((((key.hashCode()<<2) * 23)<<1) / 11)>>5),(double)(2) ))>>3)%data.length);
 	}
 }
